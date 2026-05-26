@@ -1,146 +1,189 @@
 ---
 layout: default
-title: Home
+title: Bobathon Hub
 ---
 
 <style>
-  /* Fix for jekyll-theme-minimal layout */
-  section {
-    width: 100% !important;
-    float: none !important;
-    position: static !important;
+  :root {
+    --primary: #0366d6;
+    --primary-light: #f1f8ff;
+    --text-main: #24292e;
+    --text-muted: #586069;
+    --border: #e1e4e8;
+    --bg-card: #ffffff;
+    --bg-banner: #f6f8fa;
   }
 
-  .wrapper {
-    width: auto !important;
-    margin: 0 auto !important;
+  /* Reset layout constraints to make it look cohesive */
+  #main_content, .markdown-body {
     max-width: 1200px !important;
+    padding: 20px !important;
+    margin: 0 auto !important;
   }
 
+  /* 1. Hero/Banner Layout */
+  .bobathon-banner {
+    background: var(--bg-banner);
+    border-left: 6px solid var(--primary);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    margin-bottom: 2.5rem;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+  }
+  
+  .bobathon-banner h1 {
+    color: var(--text-main);
+    font-size: 2.25rem;
+    margin: 0 0 0.75rem 0;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  
+  .bobathon-banner p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 800px;
+  }
+
+  /* 2. Responsive Dashboard Grid */
   .grid-container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-    width: 100%;
+    gap: 2.5rem;
+    align-items: start;
   }
   
-  @media(min-width: 768px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr;
+  @media(min-width: 992px) {
+    .grid-container { 
+      grid-template-columns: 1fr 1fr; 
     }
   }
-  
+
+  /* Column Headers */
+  .column-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
+
+  /* 3. Modern Component Cards */
   .card {
-    border: 1px solid #e1e4e8;
-    border-radius: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    background: #ffffff;
     margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
   }
   
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    font-size: 0.8rem;
-    background: #f1f8ff;
-    color: #0366d6;
-    border-radius: 3px;
-    margin-right: 0.5rem;
-    font-weight: bold;
-  }
-
-  .bobathon-banner {
-    background: #f6f8fa;
-    padding: 2.5rem;
-    border-radius: 6px;
-    border-left: 5px solid #0366d6;
-    margin-bottom: 2rem;
-    clear: both;
-    width: 100%;
-  }
-
-  .bobathon-banner h1 {
-    margin-top: 0;
-    margin-bottom: 1rem;
+  .card h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-main);
     line-height: 1.3;
   }
+  
+  /* Meta Tags/Badges System */
+  .badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
 
-  .bobathon-banner p {
-    margin: 0;
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 50px;
+  }
+
+  .badge-blue { background: var(--primary-light); color: var(--primary); }
+  .badge-orange { background: #fff5eb; color: #d97706; }
+  .badge-green { background: #f0fdf4; color: #16a34a; }
+
+  /* Body text rendered inside cards */
+  .card-content {
+    font-size: 0.95rem;
+    color: #4a5568;
     line-height: 1.6;
   }
 
-  .grid-container section {
-    min-width: 0;
+  .card-content p:last-child {
+    margin-bottom: 0;
   }
 
-  .grid-container h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-  }
-
-  .grid-container hr {
-    margin-bottom: 1.5rem;
-    border: 0;
-    border-top: 1px solid #e1e4e8;
-  }
-
-  .markdown-body {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-  }
-
-  /* Ensure content doesn't overlap with sidebar */
-  @media print, screen and (min-width: 960px) {
-    section {
-      width: 100% !important;
-    }
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: #fafafa;
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-style: italic;
   }
 </style>
 
 <section class="bobathon-banner">
   <h1>{{ site.data.bobathon.headline }}</h1>
-  <p style="font-size: 1.25rem; color: #586069; margin: 0;">{{ site.data.bobathon.description }}</p>
+  <p>{{ site.data.bobathon.description }}</p>
 </section>
 
 <div class="grid-container">
 
   <section>
-    <h2>🚀 Hands-on Labs</h2>
-    <hr>
+    <h2 class="column-title">🚀 Hands-on Labs</h2>
     {% for lab in site.labs %}
       <div class="card">
-        <h3 style="margin-top: 0;">{{ lab.title }}</h3>
-        <div style="margin-bottom: 1rem;">
-          <span class="badge">{{ lab.difficulty }}</span>
-          <span class="badge">⏱️ {{ lab.duration }}</span>
+        <h3>{{ lab.title }}</h3>
+        <div class="badge-container">
+          <span class="badge badge-blue">⚙️ {{ lab.difficulty }}</span>
+          <span class="badge badge-orange">⏱️ {{ lab.duration }}</span>
         </div>
-        <div class="markdown-body">
+        <div class="card-content">
           {{ lab.content }}
         </div>
       </div>
     {% else %}
-      <p style="color: #6a737d; font-style: italic;">No labs available yet. Use Pages CMS to add one!</p>
+      <div class="empty-state">
+        <p>No active labs found. Add new labs from your Pages CMS manager to populate this deck.</p>
+      </div>
     {% endfor %}
   </section>
 
   <section>
-    <h2>🤖 Bob Modes</h2>
-    <hr>
+    <h2 class="column-title">🤖 Bob Modes</h2>
     {% for mode in site.modes %}
       <div class="card">
-        <h3 style="margin-top: 0;">{{ mode.title }}</h3>
-        <div style="margin-bottom: 1rem;">
-          <span class="badge" style="background: #e3f9e5; color: #1a7f37;">{{ mode.version }}</span>
+        <h3>{{ mode.title }}</h3>
+        <div class="badge-container">
+          <span class="badge badge-green">📦 Version {{ mode.version }}</span>
         </div>
-        <div class="markdown-body">
+        <div class="card-content">
           {{ mode.content }}
         </div>
       </div>
     {% else %}
-      <p style="color: #6a737d; font-style: italic;">No modes created yet. Use Pages CMS to add one!</p>
+      <div class="empty-state">
+        <p>No application presets compiled. Use Pages CMS to add initial configurations.</p>
+      </div>
     {% endfor %}
   </section>
 

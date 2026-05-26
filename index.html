@@ -4,27 +4,30 @@ title: Bobathon Hub
 ---
 
 <style>
-  :root {
-    --primary: #0366d6;
-    --primary-light: #f1f8ff;
-    --text-main: #24292e;
-    --text-muted: #586069;
-    --border: #e1e4e8;
-    --bg-card: #ffffff;
-    --bg-banner: #f6f8fa;
-  }
-
-  /* Reset layout constraints to make it look cohesive */
-  #main_content, .markdown-body {
+  /* 1. CRITICAL FIX: Break out of the theme's narrow right-side layout wrapper */
+  body {
     max-width: 1200px !important;
-    padding: 20px !important;
     margin: 0 auto !important;
+    padding: 40px 20px !important;
+  }
+  
+  header {
+    width: 100% !important;
+    float: none !important;
+    position: static !important;
+    margin-bottom: 2rem !important;
   }
 
-  /* 1. Hero/Banner Layout */
+  section#main_content {
+    width: 100% !important;
+    float: none !important;
+    padding: 0 !important;
+  }
+
+  /* 2. Modern Banner Component */
   .bobathon-banner {
-    background: var(--bg-banner);
-    border-left: 6px solid var(--primary);
+    background: #f6f8fa; 
+    border-left: 6px solid #0366d6;
     border-radius: 8px;
     padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
@@ -32,111 +35,91 @@ title: Bobathon Hub
   }
   
   .bobathon-banner h1 {
-    color: var(--text-main);
+    color: #24292e;
     font-size: 2.25rem;
     margin: 0 0 0.75rem 0;
     font-weight: 800;
-    letter-spacing: -0.5px;
   }
   
   .bobathon-banner p {
     font-size: 1.15rem;
-    color: var(--text-muted);
+    color: #586069;
     line-height: 1.6;
     margin: 0;
-    max-width: 800px;
   }
 
-  /* 2. Responsive Dashboard Grid */
-  .grid-container {
+  /* 3. Pure CSS Clean Grid (No structural overlap) */
+  .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    align-items: start;
+    margin-top: 2rem;
+    clear: both;
   }
   
-  @media(min-width: 992px) {
-    .grid-container { 
+  @media(min-width: 768px) {
+    .dashboard-grid { 
       grid-template-columns: 1fr 1fr; 
     }
   }
 
-  /* Column Headers */
   .column-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--text-main);
+    color: #24292e;
     margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px solid #e1e4e8;
     padding-bottom: 0.5rem;
   }
 
-  /* 3. Modern Component Cards */
-  .card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
+  /* 4. Beautiful Material Cards */
+  .asset-card {
+    background: #ffffff;
+    border: 1px solid #e1e4e8;
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
   
-  .card h3 {
-    margin: 0 0 0.75rem 0;
+  .asset-card h3 {
+    margin: 0 0 0.75rem 0 !important;
     font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-main);
-    line-height: 1.3;
+    color: #24292e;
   }
   
-  /* Meta Tags/Badges System */
   .badge-container {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 0.75rem;
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
     font-size: 0.75rem;
     font-weight: 600;
     border-radius: 50px;
   }
 
-  .badge-blue { background: var(--primary-light); color: var(--primary); }
+  .badge-blue { background: #f1f8ff; color: #0366d6; }
   .badge-orange { background: #fff5eb; color: #d97706; }
   .badge-green { background: #f0fdf4; color: #16a34a; }
 
-  /* Body text rendered inside cards */
-  .card-content {
+  .card-body {
     font-size: 0.95rem;
     color: #4a5568;
     line-height: 1.6;
   }
 
-  .card-content p:last-child {
-    margin-bottom: 0;
-  }
-
   .empty-state {
     text-align: center;
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     background: #fafafa;
-    border: 2px dashed var(--border);
+    border: 2px dashed #e1e4e8;
     border-radius: 8px;
-    color: var(--text-muted);
+    color: #586069;
     font-style: italic;
   }
 </style>
@@ -146,18 +129,18 @@ title: Bobathon Hub
   <p>{{ site.data.bobathon.description }}</p>
 </section>
 
-<div class="grid-container">
+<div class="dashboard-grid">
 
   <section>
     <h2 class="column-title">🚀 Hands-on Labs</h2>
     {% for lab in site.labs %}
-      <div class="card">
+      <div class="asset-card">
         <h3>{{ lab.title }}</h3>
         <div class="badge-container">
           <span class="badge badge-blue">⚙️ {{ lab.difficulty }}</span>
           <span class="badge badge-orange">⏱️ {{ lab.duration }}</span>
         </div>
-        <div class="card-content">
+        <div class="card-body">
           {{ lab.content }}
         </div>
       </div>
@@ -171,12 +154,12 @@ title: Bobathon Hub
   <section>
     <h2 class="column-title">🤖 Bob Modes</h2>
     {% for mode in site.modes %}
-      <div class="card">
+      <div class="asset-card">
         <h3>{{ mode.title }}</h3>
         <div class="badge-container">
           <span class="badge badge-green">📦 Version {{ mode.version }}</span>
         </div>
-        <div class="card-content">
+        <div class="card-body">
           {{ mode.content }}
         </div>
       </div>

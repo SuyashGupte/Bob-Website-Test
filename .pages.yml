@@ -1,6 +1,9 @@
-media:
-  input: assets/images
-  output: /assets/images
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: assets/images
+public_folder: /assets/images
 
 collections:
   - name: labs
@@ -8,20 +11,24 @@ collections:
     folder: _labs
     extension: md
     format: frontmatter-markdown
+    create: true
     fields:
       - { name: layout, type: hidden, default: "default" }
       - { name: title, label: "Lab Title", type: string }
       - { name: difficulty, label: "Difficulty Level", type: select, options: ["Beginner", "Intermediate", "Advanced"] }
       - { name: duration, label: "Estimated Time (e.g., 45 mins)", type: string }
-      - { name: body, label: "Lab Instructions / Content", type: rich-text }
+      - { name: body, label: "Lab Instructions / Content", type: markdown }
 
   - name: modes
     label: "🤖 Bob Modes"
     folder: _modes
     extension: md
     format: frontmatter-markdown
+    create: true
     fields:
       - { name: layout, type: hidden, default: "default" }
       - { name: title, label: "Mode Name", type: string }
       - { name: version, label: "Version Tag (e.g., v1.2)", type: string }
-      - { name: body, label: "Mode Description / Key Features", type: rich-text }
+      - { name: body, label: "Mode Description / Key Features", type: markdown }
+
+# Made with Bob

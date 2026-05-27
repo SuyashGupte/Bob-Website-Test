@@ -7,12 +7,62 @@ title: Bobathon Hub
   /* Import IBM Plex Sans Font */
   @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 
+  /* CSS Variables for Theme Colors */
+  :root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f8fa;
+    --bg-tertiary: #fafafa;
+    --text-primary: #24292e;
+    --text-secondary: #586069;
+    --text-tertiary: #959da5;
+    --border-primary: #e1e4e8;
+    --border-secondary: #d1d5da;
+    --accent-primary: #0366d6;
+    --accent-hover: #0256c7;
+    --card-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.05);
+    --card-shadow-hover: rgba(0, 0, 0, 0.1);
+    --badge-blue-bg: #f1f8ff;
+    --badge-blue-text: #0366d6;
+    --badge-orange-bg: #fff5eb;
+    --badge-orange-text: #d97706;
+    --badge-green-bg: #f0fdf4;
+    --badge-green-text: #16a34a;
+    --search-focus-shadow: rgba(3, 102, 214, 0.1);
+  }
+
+  [data-theme="dark"] {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-tertiary: #1c2128;
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --text-tertiary: #6e7681;
+    --border-primary: #30363d;
+    --border-secondary: #21262d;
+    --accent-primary: #58a6ff;
+    --accent-hover: #79b8ff;
+    --card-bg: #161b22;
+    --card-shadow: rgba(0, 0, 0, 0.3);
+    --card-shadow-hover: rgba(0, 0, 0, 0.5);
+    --badge-blue-bg: #1c2d41;
+    --badge-blue-text: #58a6ff;
+    --badge-orange-bg: #2d2107;
+    --badge-orange-text: #f0ad4e;
+    --badge-green-bg: #0d2818;
+    --badge-green-text: #3fb950;
+    --search-focus-shadow: rgba(88, 166, 255, 0.2);
+  }
+
   /* 1. CRITICAL FIX: Break out of the theme's narrow right-side layout wrapper */
   body {
     max-width: 1200px !important;
     margin: 0 auto !important;
     padding: 40px 20px !important;
     font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   header {
@@ -29,17 +79,59 @@ title: Bobathon Hub
   }
 
   /* 2. Modern Banner Component */
+  /* 2. Theme Toggle Button */
+  .theme-toggle-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .theme-toggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-primary);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--card-shadow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px var(--card-shadow-hover);
+    border-color: var(--accent-primary);
+  }
+
+  .theme-toggle-icon {
+    font-size: 1.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .theme-toggle:hover .theme-toggle-icon {
+    transform: rotate(20deg);
+  }
+
+  /* 3. Modern Banner Component */
   .bobathon-banner {
-    background: #f6f8fa; 
-    border-left: 6px solid #0366d6;
+    background: var(--bg-secondary);
+    border-left: 6px solid var(--accent-primary);
     border-radius: 8px;
     padding: 2.5rem 2rem;
     margin-bottom: 2.5rem;
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.03);
+    box-shadow: inset 0 0 0 1px var(--border-primary);
+    transition: all 0.3s ease;
   }
   
   .bobathon-banner h1 {
-    color: #24292e;
+    color: var(--text-primary);
     font-size: 2.25rem;
     margin: 0 0 0.75rem 0;
     font-weight: 700;
@@ -48,12 +140,12 @@ title: Bobathon Hub
   
   .bobathon-banner p {
     font-size: 1.15rem;
-    color: #586069;
+    color: var(--text-secondary);
     line-height: 1.6;
     margin: 0;
   }
 
-  /* 3. Search Bar */
+  /* 4. Search Bar */
   .search-container {
     margin-bottom: 2rem;
   }
@@ -79,7 +171,6 @@ title: Bobathon Hub
     color: #959da5;
   }
 
-  /* 4. Tab Navigation */
   .tab-container {
     margin-bottom: 2rem;
   }
@@ -87,7 +178,7 @@ title: Bobathon Hub
   .tab-nav {
     display: flex;
     gap: 0.5rem;
-    border-bottom: 2px solid #e1e4e8;
+    border-bottom: 2px solid var(--border-primary);
     margin-bottom: 2rem;
     flex-wrap: wrap;
   }
@@ -100,20 +191,20 @@ title: Bobathon Hub
     background: transparent;
     border: none;
     border-bottom: 3px solid transparent;
-    color: #586069;
+    color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.2s ease;
     margin-bottom: -2px;
   }
 
   .tab-button:hover {
-    color: #24292e;
-    background: #f6f8fa;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
   }
 
   .tab-button.active {
-    color: #0366d6;
-    border-bottom-color: #0366d6;
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
   }
 
   .tab-content {
@@ -124,16 +215,16 @@ title: Bobathon Hub
     display: block;
   }
 
-  /* 5. Section Title */
+  /* 6. Section Title */
   .section-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #24292e;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  /* 6. Beautiful Material Cards */
+  /* 7. Beautiful Material Cards */
   .cards-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -142,35 +233,35 @@ title: Bobathon Hub
   }
 
   @media(min-width: 768px) {
-    .cards-grid { 
-      grid-template-columns: repeat(2, 1fr); 
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media(min-width: 1024px) {
-    .cards-grid { 
-      grid-template-columns: repeat(3, 1fr); 
+    .cards-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
   .asset-card {
-    background: #ffffff;
-    border: 1px solid #e1e4e8;
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
     border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px -1px var(--card-shadow);
     transition: all 0.2s ease;
   }
 
   .asset-card:hover {
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px var(--card-shadow-hover);
     transform: translateY(-2px);
   }
   
   .asset-card h3 {
     margin: 0 0 0.75rem 0 !important;
     font-size: 1.3rem;
-    color: #24292e;
+    color: var(--text-primary);
     font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 600;
   }
@@ -191,23 +282,23 @@ title: Bobathon Hub
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  .badge-blue { background: #f1f8ff; color: #0366d6; }
-  .badge-orange { background: #fff5eb; color: #d97706; }
-  .badge-green { background: #f0fdf4; color: #16a34a; }
+  .badge-blue { background: var(--badge-blue-bg); color: var(--badge-blue-text); }
+  .badge-orange { background: var(--badge-orange-bg); color: var(--badge-orange-text); }
+  .badge-green { background: var(--badge-green-bg); color: var(--badge-green-text); }
 
   .card-body {
     font-size: 0.95rem;
-    color: #4a5568;
+    color: var(--text-secondary);
     line-height: 1.6;
   }
 
   .empty-state {
     text-align: center;
     padding: 2.5rem 1.5rem;
-    background: #fafafa;
-    border: 2px dashed #e1e4e8;
+    background: var(--bg-tertiary);
+    border: 2px dashed var(--border-primary);
     border-radius: 8px;
-    color: #586069;
+    color: var(--text-secondary);
     font-style: italic;
     grid-column: 1 / -1;
   }
@@ -215,12 +306,12 @@ title: Bobathon Hub
   .no-results {
     text-align: center;
     padding: 3rem 1.5rem;
-    color: #586069;
+    color: var(--text-secondary);
     font-size: 1.1rem;
     grid-column: 1 / -1;
   }
 
-  /* 7. Pagination */
+  /* 8. Pagination */
   .pagination {
     display: flex;
     justify-content: center;
@@ -235,17 +326,17 @@ title: Bobathon Hub
     font-size: 0.95rem;
     font-weight: 500;
     font-family: 'IBM Plex Sans', sans-serif;
-    background: #ffffff;
-    border: 1px solid #e1e4e8;
+    background: var(--card-bg);
+    border: 1px solid var(--border-primary);
     border-radius: 6px;
-    color: #24292e;
+    color: var(--text-primary);
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
   .pagination-button:hover:not(:disabled) {
-    background: #f6f8fa;
-    border-color: #0366d6;
+    background: var(--bg-secondary);
+    border-color: var(--accent-primary);
   }
 
   .pagination-button:disabled {
@@ -254,22 +345,36 @@ title: Bobathon Hub
   }
 
   .pagination-button.active {
-    background: #0366d6;
+    background: var(--accent-primary);
     color: #ffffff;
-    border-color: #0366d6;
+    border-color: var(--accent-primary);
   }
 
   .pagination-info {
     padding: 0.5rem 1rem;
     font-size: 0.95rem;
-    color: #586069;
+    color: var(--text-secondary);
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  /* 8. Responsive Design */
+  /* 9. Responsive Design */
   @media(max-width: 767px) {
     body {
       padding: 20px 15px !important;
+    }
+
+    .theme-toggle-container {
+      top: 10px;
+      right: 10px;
+    }
+
+    .theme-toggle {
+      padding: 0.4rem 0.8rem;
+      font-size: 1rem;
+    }
+
+    .theme-toggle-icon {
+      font-size: 1rem;
     }
 
     .bobathon-banner {
@@ -312,6 +417,14 @@ title: Bobathon Hub
     display: none !important;
   }
 </style>
+
+<!-- Theme Toggle Button -->
+<div class="theme-toggle-container">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+    <span id="themeText">Dark</span>
+  </button>
+</div>
 
 <section class="bobathon-banner">
   <h1>{{ site.data.bobathon.headline }}</h1>
@@ -387,6 +500,36 @@ title: Bobathon Hub
 </div>
 
 <script>
+  // Theme Toggle Functionality
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const themeText = document.getElementById('themeText');
+  const html = document.documentElement;
+
+  // Check for saved theme preference or default to 'light'
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  html.setAttribute('data-theme', currentTheme);
+  updateThemeButton(currentTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeButton(newTheme);
+  });
+
+  function updateThemeButton(theme) {
+    if (theme === 'dark') {
+      themeIcon.textContent = '☀️';
+      themeText.textContent = 'Light';
+    } else {
+      themeIcon.textContent = '🌙';
+      themeText.textContent = 'Dark';
+    }
+  }
+
   // Tab Switching
   const tabButtons = document.querySelectorAll('.tab-button');
   const tabContents = document.querySelectorAll('.tab-content');

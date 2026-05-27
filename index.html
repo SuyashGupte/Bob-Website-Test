@@ -457,12 +457,6 @@ title: Bobathon Hub
   <div id="labs-tab" class="tab-content active" role="tabpanel">
     <div id="labs-container" class="cards-grid">
       {% for lab in site.labs %}
-        {% assign lab_url = lab.url %}
-        {% if lab_url contains "http" %}
-          {% assign has_lab_url = true %}
-        {% else %}
-          {% assign has_lab_url = false %}
-        {% endif %}
         <div class="asset-card" data-title="{{ lab.title | downcase }}" data-content="{{ lab.content | strip_html | downcase }}" data-industry="{{ lab.industry | join: ' ' | downcase }}" data-language="{{ lab.Language | downcase }}">
           <h3>{{ lab.title }}</h3>
           <div class="badge-container">
@@ -481,9 +475,9 @@ title: Bobathon Hub
           <div class="card-body">
             {{ lab.content }}
           </div>
-          {% if has_lab_url %}
+          {% if lab.link %}
             <div style="margin-top: 1rem;">
-              <a href="{{ lab_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <a href="{{ lab.link }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
                 🔗 View Lab
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.7;">
                   <path d="M10.5 1.5L1.5 10.5M10.5 1.5H3M10.5 1.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -505,12 +499,6 @@ title: Bobathon Hub
   <div id="modes-tab" class="tab-content" role="tabpanel">
     <div id="modes-container" class="cards-grid">
       {% for mode in site.modes %}
-        {% assign custom_url = mode.url %}
-        {% if custom_url contains "http" %}
-          {% assign has_custom_url = true %}
-        {% else %}
-          {% assign has_custom_url = false %}
-        {% endif %}
         <div class="asset-card" data-title="{{ mode.title | downcase }}" data-content="{{ mode.content | strip_html | downcase }}" data-industry="{{ mode.industry | join: ' ' | downcase }}">
           <h3>{{ mode.title }}</h3>
           <div class="badge-container">
@@ -523,9 +511,9 @@ title: Bobathon Hub
           <div class="card-body">
             {{ mode.content }}
           </div>
-          {% if has_custom_url %}
+          {% if mode.link %}
             <div style="margin-top: 1rem;">
-              <a href="{{ custom_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+              <a href="{{ mode.link }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
                 🔗 View on GitHub
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.7;">
                   <path d="M10.5 1.5L1.5 10.5M10.5 1.5H3M10.5 1.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

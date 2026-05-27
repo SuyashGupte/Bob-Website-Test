@@ -1,7 +1,3 @@
-media:
-  input: assets/images
-  output: /assets/images
-
 content:
   - name: modes
     label: "🤖 Bob Modes"
@@ -43,7 +39,7 @@ content:
         label: "Language"
         type: select
         options:
-         value: ["Python", "JavaScript", "Java", "C++", "Ruby", "Go", "Other"]
+         values: ["Python", "JavaScript", "Java", "C++", "Ruby", "Go", "Other"]
          multiple: false
          placeholder: "Select Programming language"
       - name: duration

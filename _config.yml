@@ -1,6 +1,6 @@
 title: Bobathon Hub
 description: Central hub for Bobathon content, labs, and configurations.
-theme: just-the-docs
+
 
 collections:
   labs:

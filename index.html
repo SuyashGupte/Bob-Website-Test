@@ -457,15 +457,34 @@ title: Bobathon Hub
   <div id="labs-tab" class="tab-content active" role="tabpanel">
     <div id="labs-container" class="cards-grid">
       {% for lab in site.labs %}
-        <div class="asset-card" data-title="{{ lab.title | downcase }}" data-content="{{ lab.content | strip_html | downcase }}" data-difficulty="{{ lab.difficulty | downcase }}">
+        <div class="asset-card" data-title="{{ lab.title | downcase }}" data-content="{{ lab.content | strip_html | downcase }}" data-industry="{{ lab.industry | join: ' ' | downcase }}" data-language="{{ lab.Language | downcase }}">
           <h3>{{ lab.title }}</h3>
           <div class="badge-container">
-            <span class="badge badge-blue">⚙️ {{ lab.difficulty }}</span>
-            <span class="badge badge-orange">⏱️ {{ lab.duration }}</span>
+            {% if lab.industry %}
+              {% for ind in lab.industry %}
+                <span class="badge badge-blue">🏢 {{ ind }}</span>
+              {% endfor %}
+            {% endif %}
+            {% if lab.Language %}
+              <span class="badge badge-orange">💻 {{ lab.Language }}</span>
+            {% endif %}
+            {% if lab.duration %}
+              <span class="badge badge-green">⏱️ {{ lab.duration }}</span>
+            {% endif %}
           </div>
           <div class="card-body">
             {{ lab.content }}
           </div>
+          {% if lab.url %}
+            <div style="margin-top: 1rem;">
+              <a href="{{ lab.url }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                🔗 View Lab
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.7;">
+                  <path d="M10.5 1.5L1.5 10.5M10.5 1.5H3M10.5 1.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          {% endif %}
         </div>
       {% else %}
         <div class="empty-state">
@@ -480,14 +499,28 @@ title: Bobathon Hub
   <div id="modes-tab" class="tab-content" role="tabpanel">
     <div id="modes-container" class="cards-grid">
       {% for mode in site.modes %}
-        <div class="asset-card" data-title="{{ mode.title | downcase }}" data-content="{{ mode.content | strip_html | downcase }}" data-version="{{ mode.version }}">
+        <div class="asset-card" data-title="{{ mode.title | downcase }}" data-content="{{ mode.content | strip_html | downcase }}" data-industry="{{ mode.industry | join: ' ' | downcase }}">
           <h3>{{ mode.title }}</h3>
           <div class="badge-container">
-            <span class="badge badge-green">📦 Version {{ mode.version }}</span>
+            {% if mode.industry %}
+              {% for ind in mode.industry %}
+                <span class="badge badge-blue">🏢 {{ ind }}</span>
+              {% endfor %}
+            {% endif %}
           </div>
           <div class="card-body">
             {{ mode.content }}
           </div>
+          {% if mode.url %}
+            <div style="margin-top: 1rem;">
+              <a href="{{ mode.url }}" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                🔗 View on GitHub
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.7;">
+                  <path d="M10.5 1.5L1.5 10.5M10.5 1.5H3M10.5 1.5V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          {% endif %}
         </div>
       {% else %}
         <div class="empty-state">
@@ -589,10 +622,10 @@ title: Bobathon Hub
       
       const title = card.dataset.title || '';
       const content = card.dataset.content || '';
-      const difficulty = card.dataset.difficulty || '';
-      const version = card.dataset.version || '';
+      const industry = card.dataset.industry || '';
+      const language = card.dataset.language || '';
       
-      const searchableText = `${title} ${content} ${difficulty} ${version}`;
+      const searchableText = `${title} ${content} ${industry} ${language}`;
       return searchableText.includes(searchTerm);
     });
 

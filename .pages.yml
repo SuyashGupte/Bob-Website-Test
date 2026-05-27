@@ -8,37 +8,49 @@ content:
     type: collection
     path: _modes
     fields:
-      - name: layout
-        type: string
-        default: "default"
       - name: title
         label: "Mode Name"
         type: string
-      - name: version
-        label: "Version Tag (e.g., v1.2)"
-        type: string
+      - name: industry
+        label: "Industry"
+        type: select
+        options:
+          values: ["AI", "Marketing", "Sales", "Customer Service", "Finance", "HR", "Operations", "Other"]
+          placeholder: "Select Industry"
+          multiple: true
       - name: body
-        label: "Mode Description / Key Features"
+        label: "Mode Description"
         type: rich-text
+      - name: url
+        label: "Mode Github Link"
+        type: string
   - name: labs
     label: "🤖 Bob Labs"
     type: collection
     path: _labs
     fields:
-      - name: layout
-        type: string
-        default: default
       - name: title
         label: "Lab Title"
         type: string
-      - name: difficulty
-        label: "Difficulty Level"
-        type: string
+      - name: industry
+        label: "Industry"
+        type: select
+        options:
+          values: ["AI", "Marketing", "Sales", "Customer Service", "Finance", "HR", "Operations", "Other"]
+          placeholder: "Select Industry"
+          multiple: true
+      - name: Language
+        label: "Language"
+        type: select
+        options:
+         value: ["Python", "JavaScript", "Java", "C++", "Ruby", "Go", "Other"]
+         multiple: false
+         placeholder: "Select Programming language"
       - name: duration
         label: "Estimated Time (e.g., 45 mins)"
         type: string
       - name: body
-        label: "Lab Instructions / Content"
+        label: "Lab Description"
         type: rich-text
 
 # Made with Bob

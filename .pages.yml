@@ -48,5 +48,8 @@ content:
       - name: body
         label: "Lab Description"
         type: rich-text
+      - name: url
+        label: "Lab Link"
+        type: string
 
 # Made with Bob
